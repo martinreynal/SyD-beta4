@@ -2202,7 +2202,7 @@ body.noche .cielo-fondo{opacity:1}
 .lote__fund-t{flex:1;min-width:0}
 .lote__fund-t b{display:block;font-size:15px;font-weight:700;color:#fff;line-height:1.2;cursor:pointer}
 
-.lote__ofertar{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:12px;
+.lote__ofertar{margin-top:auto;letter-spacing:.08em;display:flex;align-items:center;justify-content:center;gap:12px;
   width:100%;min-height:54px;border:0;border-radius:16px;cursor:pointer;font-family:inherit;
   font-size:16px;font-weight:700;letter-spacing:.02em;color:#04222b;
   background:linear-gradient(100deg,#22d3ee,#2dd4bf 55%,#34d399);
@@ -2611,6 +2611,23 @@ body.es-fundacion #panelIzq{overflow:visible;padding-bottom:0}
 /* el cartel de la garantía, con el monto en color */
 .of-gar__t b em{font-style:normal;color:#5eead4}
 .of-gar__t p{margin-top:6px}
+
+
+/* La cápsula del mínimo: el disco del ícono nunca se achica, por largo que
+   sea el monto. El texto cede tamaño antes que el ícono. */
+.sueno__minimo{display:inline-grid;grid-template-columns:auto 1fr;align-items:center;
+  max-width:100%;overflow:hidden}
+.sueno__minimo-ico{flex:none;aspect-ratio:1;place-self:center;
+  width:clamp(26px,3.6vh,31px);min-width:clamp(26px,3.6vh,31px);
+  height:clamp(26px,3.6vh,31px);min-height:clamp(26px,3.6vh,31px)}
+.sueno__minimo-ico svg{width:16px;height:16px;flex:none}
+.sueno__minimo-tx{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  font-size:clamp(9.5px,2.7vw,13px);padding-left:8px}
+
+
+/* Actividades y eventos: la tarjeta ocupa más ancho del carril. */
+#screen-eventos .carrusel__slide{flex-basis:92%}
+#screen-eventos .ecard{width:100%}
 
 @media (prefers-reduced-motion:reduce){*{transition-duration:.001ms !important}}
 
@@ -4423,7 +4440,7 @@ function tarjetaSubasta(a){
 
       (puedeAportar()
         ? '<button class="lote__ofertar" data-pujar="'+a.id+'">'+
-            'Superá la oferta · '+pesos(minimo)+
+            'SUBASTAR'+
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'+
             '<path d="M4 12h15"/><path d="M13.5 6.5 19.5 12l-6 5.5"/></svg></button>'
         : '')+
@@ -6418,7 +6435,7 @@ function tarjetaSueno(x){
         '<span class="sueno__minimo-ico">'+
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+
           '<path d="M4 16.5 9.5 11l3.5 3.5L20 7.5"/><path d="M15.5 7.5H20V12"/></svg></span>'+
-        'Superá la oferta · <b>'+pesos(minimo)+'</b></span>'+
+        '<span class="sueno__minimo-tx">Superá la oferta · <b>'+pesos(minimo)+'</b></span></span>'+
     '</div>'+
 
     (propio ? '<button class="borrar-sueno" data-borrar-sueno="'+x.id+'">Eliminar publicación</button>' : '')+
