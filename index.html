@@ -258,7 +258,7 @@ img{display:block;max-width:100%}
 .subastas-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain;padding-bottom:4px}
 .subastas-grid::-webkit-scrollbar{display:none}
-.subastas-grid > .lote{flex:0 0 86%;scroll-snap-align:center}
+.subastas-grid > .lote{flex:0 0 82%;scroll-snap-align:center}
 .subastas-nav{display:flex;justify-content:center;gap:7px;margin-top:14px}
 .subastas-grid--viejo{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
 .subasta-card{border:1px solid var(--linea);border-radius:18px;background:var(--blanco);overflow:hidden;
@@ -2111,6 +2111,11 @@ body.noche .cielo-fondo{opacity:1}
   display:grid;place-items:center;background:#0d2033;border:2px solid rgba(255,255,255,.9);color:#fff}
 .perfil-foto__lapiz svg{width:14px;height:14px}
 .perfil-tarjeta__datos{position:relative;z-index:1;min-width:0}
+.salir-chico{position:absolute;top:12px;right:12px;z-index:2;display:flex;align-items:center;gap:5px;
+  padding:6px 11px;border-radius:999px;cursor:pointer;font-family:inherit;font-size:11.5px;font-weight:600;
+  background:rgba(229,72,77,.14);border:1px solid rgba(229,72,77,.4);color:#fca5a5}
+.salir-chico svg{width:14px;height:14px}
+.salir-chico:active{background:rgba(229,72,77,.26)}
 .perfil-tarjeta__nombre{font-size:26px;font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.1}
 .perfil-tarjeta__handle{margin-top:4px;font-size:15px;font-weight:600;color:#5eead4}
 .perfil-tarjeta__mail{margin-top:4px;font-size:14px;color:rgba(255,255,255,.72);overflow-wrap:anywhere}
@@ -2151,9 +2156,6 @@ body.noche .cielo-fondo{opacity:1}
   color:#fff;line-height:1.1}
 .cab-seccion i{display:flex;align-items:center;gap:7px;margin-top:4px;font-style:normal;
   font-size:12.5px;color:rgba(159,196,216,.85)}
-.btn-volver{background:none;border:1px solid rgba(94,234,212,.6);color:#5eead4;
-  border-radius:999px;padding:9px 22px;font-size:14.5px;font-weight:600;font-family:inherit;cursor:pointer}
-.btn-volver:active{background:rgba(45,212,191,.14)}
 
 .lote{height:100%;display:flex;flex-direction:column;overflow:hidden;border-radius:22px;
   background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
@@ -2176,12 +2178,6 @@ body.noche .cielo-fondo{opacity:1}
 .lote__precio{flex:1;min-width:0}
 .lote__monto{display:block;margin-top:2px;font-size:clamp(23px,3.4vh,30px);font-weight:700;color:#2dd4bf;
   letter-spacing:-.02em;line-height:1.05;text-shadow:0 0 20px rgba(45,212,191,.45)}
-.lote__gana{flex:none;max-width:44%;padding-left:12px;border-left:1px solid rgba(255,255,255,.12)}
-.lote__ganador{display:flex;align-items:center;gap:8px;margin-top:5px}
-.lote__ava{width:30px;height:30px;border-radius:50%;flex:none;display:grid;place-items:center;
-  background:rgba(255,255,255,.08);color:#9fc4d8}
-.lote__ava svg{width:17px;height:17px}
-.lote__ganador b{font-size:13px;font-weight:600;line-height:1.2;color:#fff}
 
 .reloj{display:flex;align-items:center;gap:11px;margin-top:11px;padding:10px 12px;border-radius:15px;
   background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09)}
@@ -2213,6 +2209,408 @@ body.noche .cielo-fondo{opacity:1}
   box-shadow:0 0 26px rgba(45,212,191,.4), inset 0 1px 0 rgba(255,255,255,.5)}
 .lote__ofertar svg{width:20px;height:20px}
 .lote__ofertar:active{filter:brightness(1.1)}
+
+
+/* ==================== CUMPLÍ TU SUEÑO ====================
+   La tarjeta ocupa todo el hueco entre la cabecera y el botón. */
+#screen-aporte.is-active{display:flex !important;flex-direction:column;height:100dvh;overflow:hidden}
+#screen-aporte .alta__top{flex:none}
+#screen-aporte .alta{flex:1;min-height:0;display:flex !important;flex-direction:column;
+  padding:12px 16px 0 !important}
+#screen-aporte .alta__form{flex:1;min-height:0;display:flex;flex-direction:column}
+#screen-aporte #apCampos{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+#screen-aporte .tarjeta-form{flex:1;min-height:0;display:flex;flex-direction:column;
+  padding:16px 16px 12px;overflow:hidden}
+/* el campo del texto se queda con todo lo que sobre */
+#screen-aporte .tarjeta-form .field{flex:none;margin-bottom:10px}
+#screen-aporte .tarjeta-form .field:nth-child(2){flex:1;min-height:0;display:flex;flex-direction:column}
+#screen-aporte .caja-deseo{flex:1;min-height:110px !important;height:auto !important;resize:none}
+#screen-aporte .field--fund .fund-res{max-height:104px}
+#screen-aporte .alta__acciones{flex:none;margin:0 !important;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom)) !important}
+
+
+/* ==================== SUBASTAS ACTIVAS: NADA CORTADO ==================== */
+#screen-deseos .suenos-lista{align-items:stretch}
+.sueno{max-height:100%;overflow:hidden}
+.sueno__cita p{-webkit-line-clamp:4}
+.sueno__minimo{max-width:100%;flex-wrap:nowrap;white-space:nowrap;
+  font-size:clamp(10.5px,2.6vw,12.5px);padding:6px 14px 6px 6px}
+.sueno__minimo b{white-space:nowrap}
+.sueno__monto{font-size:clamp(26px,4.4vh,40px);white-space:nowrap}
+.sueno__btn{font-size:clamp(14.5px,3.8vw,17px);white-space:nowrap;padding:0 14px}
+@media (max-height:740px){
+  .sueno{padding:15px 15px 13px}
+  .sueno__ava{width:44px;height:44px}
+  .sueno__titulo{font-size:clamp(18px,2.6vh,22px)}
+  .sueno__cita p{-webkit-line-clamp:3}
+  .sueno__btn{min-height:50px}
+}
+
+
+/* la foto del lote se abre en grande */
+.lote__foto.es-tocable{cursor:zoom-in}
+.visor{position:fixed;inset:0;z-index:120;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:16px;padding:24px;background:rgba(3,9,18,.92);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  opacity:0;transition:opacity .22s}
+.visor.is-on{opacity:1}
+.visor__marco{margin:0;max-width:100%;max-height:74vh;border-radius:20px;overflow:hidden;
+  border:1.5px solid rgba(94,234,212,.7);
+  box-shadow:0 0 34px rgba(45,212,191,.28), 0 24px 60px rgba(0,0,0,.6)}
+.visor__marco img{display:block;max-width:100%;max-height:74vh;object-fit:contain}
+.visor__pie{margin:0;font-size:14px;color:rgba(255,255,255,.85);text-align:center;max-width:32ch}
+.visor__cerrar{position:absolute;top:calc(14px + env(safe-area-inset-top));right:16px;
+  width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.2);color:#fff;font-size:24px;line-height:1;cursor:pointer}
+
+/* el cronómetro: cuenta arriba, fecha abajo */
+.reloj{flex-direction:column;align-items:stretch;gap:8px}
+.reloj__fila{display:flex;align-items:center;gap:11px}
+.reloj__fecha{justify-content:center;max-width:none;padding-top:8px;
+  border-top:1px solid rgba(255,255,255,.1);font-size:11.5px}
+
+
+/* ==================== AJUSTES DE ESPACIO ====================
+   Cumplí tu sueño: la caja de texto crece y el botón baja al ras del menú. */
+#screen-aporte .caja-deseo{min-height:150px !important}
+#screen-aporte .tarjeta-form .field:nth-child(2){flex:2 1 auto}
+#screen-aporte .alta__acciones{padding:8px 16px calc(6px + env(safe-area-inset-bottom)) !important}
+#screen-aporte .btn--publicar{min-height:50px}
+#screen-aporte .alta{padding-bottom:0 !important}
+
+/* Subastas activas: del buscador al menú, sin aire de más. */
+#screen-deseos .stats-pantalla{padding-bottom:calc(var(--nav-alto) + 6px) !important}
+#screen-deseos .buscador-wrap{margin-bottom:8px}
+#screen-deseos .suenos-lista{margin-top:0;padding-bottom:0}
+
+/* Otros sueños: el botón, algo más contenido. */
+.lote__ofertar{min-height:48px;font-size:15px;gap:10px}
+.lote__ofertar svg{width:18px;height:18px}
+
+
+/* ==================== SUBASTAS ACTIVAS: LA TARJETA ENTRA ENTERA ====================
+   Todo se mide contra el alto de pantalla, y la cita es lo único elástico:
+   cede líneas para que el botón y el pie nunca queden bajo el menú. */
+#screen-deseos .stats-pantalla{padding-bottom:0 !important;
+  bottom:calc(var(--nav-alto) + 8px) !important}
+#screen-deseos .suenos-lista{padding-bottom:0;align-items:stretch}
+.sueno{height:100%;max-height:100%;padding:clamp(12px,1.8vh,17px);overflow:hidden}
+
+.sueno__cab{gap:10px}
+.sueno__ava{width:clamp(40px,5.6vh,50px);height:clamp(40px,5.6vh,50px)}
+.sueno__quien b{font-size:clamp(15px,2.1vh,17px)}
+.sueno__quien span{font-size:clamp(11.5px,1.6vh,13px)}
+
+.sueno__titulo{margin-top:clamp(8px,1.4vh,14px);font-size:clamp(17px,2.6vh,24px);line-height:1.16}
+
+.sueno__cita{flex:1 1 0;min-height:0;margin-top:clamp(7px,1.2vh,12px);padding:0 20px 0 22px}
+.sueno__cita p{font-size:clamp(12.5px,1.8vh,14.5px);line-height:1.42;-webkit-line-clamp:4}
+.sueno__comilla{font-size:clamp(24px,3.4vh,32px)}
+
+.sueno__oferta{margin-top:clamp(8px,1.2vh,12px);padding-top:clamp(9px,1.4vh,13px)}
+.sueno__rotulo{font-size:clamp(9px,1.3vh,10.5px)}
+.sueno__monto{margin-top:2px;font-size:clamp(25px,4.2vh,38px)}
+.sueno__gana{margin-top:clamp(4px,.8vh,8px);font-size:clamp(12px,1.7vh,14px)}
+.sueno__minimo{margin-top:clamp(7px,1.1vh,11px);padding:5px 13px 5px 5px;
+  font-size:clamp(10px,1.4vh,12px)}
+.sueno__minimo-ico{width:clamp(24px,3.2vh,28px);height:clamp(24px,3.2vh,28px)}
+.sueno__minimo-ico svg{width:60%;height:60%}
+
+.sueno__btn{margin-top:clamp(9px,1.4vh,14px);min-height:clamp(44px,6vh,52px);
+  font-size:clamp(14px,2vh,16px)}
+.sueno__pie{margin-top:clamp(6px,1vh,10px);font-size:clamp(10.5px,1.4vh,12px)}
+.sueno__pie svg{width:14px;height:14px}
+
+/* si la pantalla es corta, la cita cede primero */
+@media (max-height:780px){ .sueno__cita p{-webkit-line-clamp:3} }
+@media (max-height:680px){ .sueno__cita p{-webkit-line-clamp:2} }
+
+
+/* Subastas activas: la tarjeta arranca pegada al buscador. */
+#screen-deseos .stats-pantalla{padding-top:0 !important}
+#screen-deseos .buscador-wrap,#screen-deseos .buscador{margin:0 0 8px !important;max-width:none !important;flex:none}
+#screen-deseos .buscador input{padding-top:12px !important;padding-bottom:12px !important}
+#screen-deseos .suenos-lista{margin:0 !important;padding:0 !important;flex:none}
+#screen-subastas .subastas-grid,#screen-eventos .carrusel{margin:0 !important;flex:none}
+.sueno{height:100%;max-height:100%}
+
+
+/* ==================== BARRA SEGÚN EL ROL ====================
+   La fundación no navega como donante: administra lo suyo. */
+.nav5__fila--fundacion{display:none}
+body.es-fundacion .nav5__fila--donante{display:none}
+body.es-fundacion .nav5__fila--fundacion{display:grid;grid-template-columns:repeat(5,1fr)}
+body.es-fundacion .cab__perfil{display:none}
+body.es-fundacion .nav5__fila--fundacion .nav5__b{grid-template-rows:auto auto;gap:3px}
+body.es-fundacion .nav5__txt{display:block;font-size:9px;letter-spacing:0}
+body.es-fundacion .nav5__b svg{width:22px;height:22px}
+
+/* El perfil de la fundación se recorre entero. */
+body.es-fundacion.perfil-quieto,body.es-fundacion.menu-fijo{position:static;overflow:visible}
+body.es-fundacion #screen-app{height:auto;display:block;overflow:visible}
+body.es-fundacion .viewport{padding-bottom:calc(var(--nav-alto) + 20px) !important}
+body.es-fundacion #panelIzq{overflow:visible;padding-bottom:0}
+
+
+/* Todas las tarjetas miden lo mismo y el pie queda a dos píxeles del borde:
+   con alto libre, cada una tomaba su propio tamaño y sólo la primera calzaba. */
+.sueno{height:100% !important;max-height:100% !important;padding-bottom:1px !important}
+.sueno__cita{flex:1 1 0}
+.sueno__btn{margin-bottom:4px}
+#screen-deseos .suenos-lista{align-items:stretch}
+
+
+/* ==================== GARANTÍA PARA SUBASTAR ==================== */
+.garantia{border-radius:16px;padding:14px 16px;
+  background:linear-gradient(150deg, rgba(45,212,191,.16), rgba(255,255,255,.04));
+  border:1px solid rgba(94,234,212,.35)}
+.garantia__monto{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.garantia__monto span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(94,234,212,.9);font-weight:600}
+.garantia__monto b{font-size:26px;font-weight:700;color:#fff;letter-spacing:-.02em}
+.garantia__nota{margin:8px 0 0;font-size:12.5px;line-height:1.45;color:rgba(159,196,216,.9)}
+.medios{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
+.medio{display:flex;align-items:center;gap:9px;padding:12px 13px;border-radius:14px;cursor:pointer;
+  font-family:inherit;font-size:13.5px;font-weight:600;color:#fff;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)}
+.medio__ico{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+  background:rgba(255,255,255,.06);color:var(--celeste)}
+.medio__ico svg{width:17px;height:17px}
+.medio.is-on{border-color:rgba(94,234,212,.75);background:rgba(45,212,191,.14)}
+.medio.is-on .medio__ico{color:#5eead4;background:rgba(45,212,191,.2)}
+
+
+/* ==================== SUBASTAS DE LA FUNDACIÓN ==================== */
+#screen-fsubastas .stats-pantalla{padding:14px 16px calc(var(--nav-alto) + 20px) !important;
+  display:block !important;overflow-y:auto}
+.crear-subasta{display:flex;align-items:center;gap:14px;width:100%;text-align:left;cursor:pointer;
+  font-family:inherit;padding:18px;border-radius:20px;border:0;color:#04222b;
+  background:linear-gradient(105deg,#22d3ee,#2dd4bf 52%,#34d399);
+  box-shadow:0 0 34px rgba(45,212,191,.45), inset 0 1px 0 rgba(255,255,255,.5)}
+.crear-subasta:active{filter:brightness(1.1)}
+.crear-subasta__ico{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(4,34,43,.16);color:#04222b}
+.crear-subasta__ico svg{width:24px;height:24px}
+.crear-subasta__t b{display:block;font-size:19px;font-weight:700;line-height:1.15}
+.crear-subasta__t span{display:block;margin-top:3px;font-size:12.5px;opacity:.8}
+#screen-fsubastas .perfil-rotulo{margin-top:22px}
+
+
+/* ==================== OTROS SUEÑOS: CAJAS PAREJAS ==================== */
+#screen-subastas .subastas-grid{align-items:flex-start}
+.lote{height:100% !important;max-height:100% !important;padding-bottom:2px}
+.lote__cuerpo{padding:14px 15px 12px}
+/* el bloque de la fundación sube y su logo también */
+.lote__fund{margin-top:4px;align-items:center}
+.lote__fund .avatar{width:48px;height:48px;margin-top:-6px}
+.lote__fund-t b{font-size:15.5px}
+.reloj{margin-top:9px}
+.lote__ofertar{margin-top:10px}
+
+/* ==================== FUNDACIONES: TARJETAS PAREJAS Y GRANDES ==================== */
+#screen-fundaciones .carrusel__slide{display:flex;align-items:stretch}
+#screen-fundaciones .card{height:100%;display:flex;flex-direction:column;width:100%}
+#screen-fundaciones .card__body{flex:1;min-height:0;display:flex;flex-direction:column}
+#screen-fundaciones .card__causas{flex:1;min-height:0;overflow:hidden}
+#screen-fundaciones .carrusel__viewport{padding:6px 0}
+#screen-fundaciones .carrusel__slide{flex-basis:88%}
+
+
+/* la garantía, en pantalla propia */
+#screen-garantia.is-active{display:flex;flex-direction:column;height:100dvh;overflow:hidden}
+#screen-garantia .stats-pantalla{flex:1;min-height:0;overflow-y:auto;
+  padding:14px 16px 8px !important;display:block !important;position:static !important;height:auto !important}
+.gar-pie{flex:none;padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  border-top:1px solid rgba(255,255,255,.1)}
+.gar-pie .btn{width:100%}
+
+
+/* Subastas activas: el texto del sueño cede tamaño y el resto crece. */
+.sueno__cita p{font-size:clamp(11.5px,1.5vh,13px);line-height:1.35;-webkit-line-clamp:4}
+.sueno__comilla{font-size:clamp(20px,2.6vh,26px)}
+.sueno__ava{width:clamp(46px,6.4vh,58px);height:clamp(46px,6.4vh,58px)}
+.sueno__quien b{font-size:clamp(16px,2.3vh,19px)}
+.sueno__quien span{font-size:clamp(12px,1.7vh,14px)}
+.sueno__titulo{font-size:clamp(19px,3vh,27px)}
+.sueno__monto{font-size:clamp(28px,4.8vh,42px)}
+.sueno__gana{font-size:clamp(13px,1.9vh,15px)}
+.sueno__minimo{font-size:clamp(11px,1.6vh,13px);padding:7px 16px 7px 6px}
+.sueno__minimo-ico{width:clamp(26px,3.6vh,31px);height:clamp(26px,3.6vh,31px)}
+.sueno__btn{min-height:clamp(48px,6.6vh,56px);font-size:clamp(15px,2.2vh,17px)}
+
+/* Otros sueños: caja más angosta y la última oferta siempre en una línea. */
+.subastas-grid > .lote{flex:0 0 74%}
+.lote__monto{font-size:clamp(19px,2.7vh,25px);white-space:nowrap;letter-spacing:-.03em}
+.lote__cifras{gap:10px}
+
+
+/* la pantalla de registrar subasta */
+
+
+/* ==================== OTROS SUEÑOS: EL TÍTULO SE VE ====================
+   Sin el bloque de "va ganando", la foto cede lugar y el título respira. */
+#screen-subastas .lote__foto{flex:0 0 34%}
+#screen-subastas .lote__cuerpo{padding:14px 16px 12px}
+#screen-subastas .lote__titulo{font-size:clamp(18px,2.7vh,23px);line-height:1.2;margin:0 0 4px;
+  -webkit-line-clamp:2;min-height:0}
+#screen-subastas .lote__cifras{display:block;margin-top:10px}
+#screen-subastas .lote__precio{width:100%}
+#screen-subastas .lote__monto{font-size:clamp(22px,3.4vh,30px)}
+#screen-subastas .lote__rotulo{font-size:10px}
+#screen-subastas .reloj{margin-top:11px}
+#screen-subastas .lote__fund{margin-top:11px}
+
+
+/* ==================== REGISTRAR SUBASTA: TODO EN UNA PANTALLA ====================
+   Cada bloque se mide contra el alto real: nada de desplazarse. */
+#screen-garantia.is-active{height:100dvh;overflow:hidden;display:flex;flex-direction:column}
+#screen-garantia .alta__top{flex:none;padding-top:8px !important;padding-bottom:8px !important}
+#screen-garantia .stats-pantalla{flex:1;min-height:0;overflow:hidden !important;
+  display:flex !important;flex-direction:column;gap:0;padding:8px 16px 4px !important}
+
+
+
+#screen-garantia .paso-sep{flex:none;margin:clamp(7px,1.1vh,11px) 0 clamp(5px,.8vh,8px) !important;
+  font-size:clamp(9px,1.3vh,10.5px)}
+#screen-garantia .medios{flex:none;margin-bottom:clamp(6px,1vh,10px);gap:7px}
+#screen-garantia .medio{padding:clamp(8px,1.2vh,11px) 10px;font-size:clamp(11.5px,1.6vh,13px)}
+#screen-garantia .medio__ico{width:clamp(22px,3vh,27px);height:clamp(22px,3vh,27px)}
+#screen-garantia .medio__ico svg{width:60%;height:60%}
+#screen-garantia .field{margin-bottom:clamp(5px,.9vh,9px)}
+#screen-garantia .field label{font-size:clamp(8.5px,1.2vh,9.5px);margin-bottom:3px}
+#screen-garantia .field input{padding:clamp(8px,1.2vh,11px) 12px !important;
+  font-size:clamp(12.5px,1.7vh,14px)}
+/* el campo de dinero necesita lugar para el signo: la forma abreviada de
+   arriba se lo comía y el número arrancaba encima del $ */
+#screen-garantia .pesos input{padding-left:38px !important}
+#screen-garantia .pesos__signo{left:15px;font-size:15px}
+#screen-garantia .field__hint{font-size:clamp(9.5px,1.3vh,10.5px);margin-top:3px}
+#screen-garantia .grid2{gap:7px}
+
+.gar-pie{flex:none;padding:8px 16px calc(8px + env(safe-area-inset-bottom))}
+.btn--confirmar{width:100%;min-height:clamp(46px,6.4vh,54px);border-radius:16px;
+  font-size:clamp(14px,2vh,16px);font-weight:700;letter-spacing:.09em;
+  background:linear-gradient(100deg,#22d3ee,#2dd4bf 55%,#34d399) !important;color:#04222b !important;
+  box-shadow:0 0 30px rgba(45,212,191,.45), inset 0 1px 0 rgba(255,255,255,.5) !important}
+.btn--confirmar:active{filter:brightness(1.1)}
+
+
+/* vencimiento y código: campos cortos, en la misma línea */
+
+
+/* ==================== VOLVER · UN SOLO BOTÓN ====================
+   Flecha en un disco chico con el degradado del logo, igual en toda la app. */
+.volver-ico{flex:none;width:38px;height:38px;border-radius:50%;border:0;cursor:pointer;
+  display:grid;place-items:center;color:#04222b;
+  background:linear-gradient(120deg,#22d3ee,#2dd4bf 55%,#a3e635);
+  box-shadow:0 0 16px rgba(45,212,191,.4), inset 0 1px 0 rgba(255,255,255,.45)}
+.volver-ico svg{width:19px;height:19px}
+.volver-ico:active{transform:scale(.92);filter:brightness(1.1)}
+
+
+/* ==================== HACER OFERTA ==================== */
+.of-top{flex:none;display:grid;grid-template-columns:38px 1fr 38px;align-items:center;
+  padding:calc(8px + env(safe-area-inset-top)) 16px 10px;
+  background:rgba(6,17,31,.75);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.08)}
+.of-cerrar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;cursor:pointer;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);color:#fff}
+.of-cerrar svg{width:18px;height:18px}
+.of-cerrar:active{transform:scale(.92)}
+.of-titulo{text-align:center;font-size:17px;font-weight:700;color:#fff}
+
+#screen-garantia .stats-pantalla{padding:12px 16px 6px !important}
+.of-rot{margin:clamp(9px,1.5vh,15px) 2px clamp(5px,.9vh,9px);font-size:clamp(9.5px,1.3vh,11px);
+  letter-spacing:.18em;text-transform:uppercase;color:#5eead4;font-weight:700}
+
+/* el lote */
+
+/* el monto, con menos y más */
+.of-monto{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:clamp(7px,1.1vh,11px) clamp(9px,1.3vh,13px);border-radius:18px;
+  background:rgba(255,255,255,.04);border:1.5px solid rgba(94,234,212,.75)}
+.of-paso{flex:none;width:clamp(38px,5.2vh,46px);height:clamp(38px,5.2vh,46px);border-radius:50%;
+  display:grid;place-items:center;cursor:pointer;color:#5eead4;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+.of-paso svg{width:46%;height:46%}
+.of-paso:active{background:rgba(45,212,191,.2)}
+.of-monto__v{flex:1;text-align:center;font-size:clamp(26px,4.4vh,38px);font-weight:700;color:#fff;
+  letter-spacing:-.02em;white-space:nowrap}
+.of-monto__v em{font-style:normal;margin-right:6px;font-weight:600;opacity:.9}
+.of-supera{display:flex;align-items:center;justify-content:center;gap:8px;margin:clamp(7px,1vh,11px) auto 0;
+  width:fit-content;padding:6px 15px;border-radius:999px;
+  border:1px solid rgba(94,234,212,.35);background:rgba(45,212,191,.08);
+  font-size:clamp(11px,1.5vh,12.5px);color:rgba(255,255,255,.85)}
+.of-supera svg{width:16px;height:16px;color:#5eead4;flex:none}
+.of-supera b{color:#5eead4}
+
+/* la garantía */
+.of-gar{display:flex;gap:13px;margin-top:clamp(9px,1.4vh,14px);padding:clamp(10px,1.5vh,14px);
+  border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.of-gar__ico{flex:none;width:clamp(44px,6vh,52px);height:clamp(44px,6vh,52px);border-radius:50%;
+  display:grid;place-items:center;color:#5eead4;
+  background:rgba(45,212,191,.14);border:1px solid rgba(94,234,212,.3)}
+.of-gar__ico svg{width:52%;height:52%}
+.of-gar__t b{display:block;font-size:clamp(14px,2vh,16px);font-weight:700;color:#fff}
+.of-gar__t i{display:block;font-style:normal;margin-top:1px;font-size:clamp(19px,2.8vh,25px);
+  font-weight:700;color:#5eead4;letter-spacing:-.02em}
+.of-gar__t p{margin:5px 0 0;font-size:clamp(10.5px,1.4vh,12px);line-height:1.35;color:var(--celeste)}
+
+/* el medio elegido */
+.of-medio{display:flex;align-items:center;gap:13px;margin-top:9px;padding:clamp(9px,1.3vh,13px) 14px;
+  border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.of-marca{flex:none;font-size:15px;font-weight:800;font-style:italic;color:#fff;letter-spacing:.02em}
+.of-marca--mp{font-style:normal;color:#5eead4}
+.of-medio__t{flex:1;min-width:0}
+.of-medio__t b{display:block;font-size:15px;font-weight:600;color:#fff;letter-spacing:.06em}
+.of-medio__t span{display:block;font-size:12px;color:var(--celeste)}
+.of-cambiar{flex:none;display:flex;align-items:center;gap:4px;background:none;border:0;cursor:pointer;
+  font-family:inherit;font-size:13.5px;font-weight:600;color:#5eead4}
+.of-cambiar svg{width:15px;height:15px}
+.of-cambiar[disabled],.of-cambiar.es-off{opacity:.45;cursor:not-allowed}
+.of-seguro{display:flex;align-items:center;justify-content:center;gap:7px;
+  margin:clamp(8px,1.2vh,12px) 0 0;font-size:clamp(10px,1.3vh,11.5px);color:rgba(159,196,216,.7)}
+.of-seguro svg{width:14px;height:14px;flex:none}
+
+/* el pie */
+.gar-pie{flex:none;padding:10px 16px calc(8px + env(safe-area-inset-bottom));border-top:0}
+.btn--confirmar{display:flex;align-items:center;justify-content:center;gap:12px}
+.btn--confirmar svg{width:20px;height:20px}
+.of-pie{margin:8px 0 0;text-align:center;font-size:11.5px;color:rgba(159,196,216,.75)}
+
+
+/* el encabezado del sueño, sin caja ni ícono */
+.of-enc{text-align:center;padding:0 4px}
+.of-enc__t{display:block;font-size:clamp(15px,2.2vh,19px);font-weight:700;color:#fff;line-height:1.2;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.of-enc__r{display:block;margin-top:4px;font-size:clamp(9.5px,1.3vh,11px);letter-spacing:.18em;
+  text-transform:uppercase;color:#5eead4;font-weight:700}
+.of-enc__m{display:block;font-style:normal;margin-top:1px;font-size:clamp(20px,3vh,27px);
+  font-weight:700;color:#fff;letter-spacing:-.02em}
+
+/* todo sube: menos aire entre bloques */
+#screen-garantia .stats-pantalla{padding-top:8px !important}
+.of-rot{margin:clamp(7px,1.1vh,11px) 2px clamp(4px,.7vh,7px)}
+.of-supera{margin-top:clamp(5px,.8vh,9px)}
+.of-gar{margin-top:clamp(7px,1.1vh,11px);padding:clamp(9px,1.3vh,12px)}
+.of-medio{margin-top:7px}
+.of-seguro{margin-top:clamp(6px,1vh,10px)}
+.gar-pie{padding-top:8px}
+
+
+/* el monto se escribe tocándolo */
+.of-monto__v input{width:100%;background:none;border:0;outline:0;color:#fff;font-family:inherit;
+  font-size:inherit;font-weight:inherit;letter-spacing:inherit;text-align:center;padding:0;
+  min-width:0;font-variant-numeric:tabular-nums}
+.of-monto__v{display:flex;align-items:center;justify-content:center;gap:0}
+.of-monto__v em{flex:none}
+.of-supera.es-baja{border-color:rgba(252,165,165,.45);background:rgba(229,72,77,.1)}
+.of-supera.es-baja svg,.of-supera.es-baja b{color:#fca5a5}
+
+/* el cartel de la garantía, con el monto en color */
+.of-gar__t b em{font-style:normal;color:#5eead4}
+.of-gar__t p{margin-top:6px}
 
 @media (prefers-reduced-motion:reduce){*{transition-duration:.001ms !important}}
 
@@ -2353,11 +2751,6 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
 
 
 /* ==================== NOVEDADES ==================== */
-.volver-ico{background:linear-gradient(100deg,#22d3ee,#2dd4bf 55%,#34d399);border:0;
-  width:36px;height:36px;border-radius:50%;display:grid;place-items:center;cursor:pointer;
-  color:#04222b;box-shadow:0 0 16px rgba(45,212,191,.35), inset 0 1px 0 rgba(255,255,255,.45)}
-.volver-ico svg{width:19px;height:19px}
-.volver-ico:active{transform:scale(.92);filter:brightness(1.1)}
 
 #screen-avisos #listaAvisos{display:block}
 .avisos__grupo{margin:14px 2px 7px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;
@@ -2458,7 +2851,7 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
 .suenos-lista{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;scrollbar-width:none}
 .suenos-lista::-webkit-scrollbar{display:none}
-.sueno{flex:0 0 86%;scroll-snap-align:center;height:100%;display:flex;flex-direction:column;
+.sueno{flex:0 0 84%;scroll-snap-align:center;height:100%;display:flex;flex-direction:column;
   padding:18px 18px 16px;border-radius:24px;overflow:hidden;
   background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
   border:1px solid rgba(103,232,249,.25);
@@ -2471,7 +2864,6 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
 .sueno__quien{min-width:0}
 .sueno__quien b{display:flex;align-items:center;gap:6px;font-size:17px;font-weight:700;color:#fff;
   line-height:1.15}
-.sueno__ok{width:17px;height:17px;flex:none;color:#2dd4bf}
 .sueno__quien span{display:block;margin-top:2px;font-size:13px;color:rgba(159,196,216,.85)}
 
 .sueno__titulo{flex:none;margin:14px 0 0;font-size:clamp(20px,3vh,26px);font-weight:500;
@@ -2503,7 +2895,7 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
   background:rgba(45,212,191,.16);color:#5eead4}
 .sueno__minimo-ico svg{width:16px;height:16px}
 
-.sueno__btn{flex:none;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:12px;
+.sueno__btn{flex:none;margin-top:14px;letter-spacing:.08em;display:flex;align-items:center;justify-content:center;gap:12px;
   width:100%;min-height:56px;border:0;border-radius:16px;cursor:pointer;font-family:inherit;
   font-size:17px;font-weight:700;letter-spacing:.02em;color:#04222b;
   background:linear-gradient(100deg,#22d3ee,#2dd4bf 55%,#34d399);
@@ -2592,7 +2984,7 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
 </div>
 
 <nav class="nav5" id="nav5" aria-label="Secciones">
-  <div class="nav5__fila">
+  <div class="nav5__fila nav5__fila--donante">
     <button class="nav5__b" data-tab="apoyo" aria-label="Fundaciones que apoyo">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 20.4s-7.3-4.6-7.3-9.6a4.2 4.2 0 0 1 7.3-2.7 4.2 4.2 0 0 1 7.3 2.7c0 5-7.3 9.6-7.3 9.6z"/></svg>
@@ -2604,6 +2996,37 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
     <button class="nav5__b" data-tab="avisos" aria-label="Notificaciones">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 8.6a6 6 0 1 0-12 0c0 6-2 7.4-2 7.4h16s-2-1.4-2-7.4z"/><path d="M13.7 19.6a2 2 0 0 1-3.4 0"/></svg>
+    </button>
+  </div>
+
+  <div class="nav5__fila nav5__fila--fundacion">
+    <button class="nav5__b" data-tab="fSubastas" aria-label="Subastas">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="18.6" width="12.4" height="2.4" rx="1.2"/>
+        <path d="M13.6 2.6l6.2 6.2-2.8 2.8-6.2-6.2z"/><path d="M11.4 7.6l2.2 2.2-6.8 6.8-2.2-2.2z"/></svg>
+      <span class="nav5__txt">Subastas</span>
+    </button>
+    <button class="nav5__b" data-tab="fSuenos" aria-label="Sueños">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3.4l2.2 4.6 5 .6-3.7 3.4 1 5-4.5-2.5-4.5 2.5 1-5L4.8 8.6l5-.6z"/></svg>
+      <span class="nav5__txt">Sueños</span>
+    </button>
+    <button class="nav5__b is-on" data-tab="fPerfil" aria-label="Mi fundación">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3.2 20.4h17.6"/><path d="M5 20.4V9.6l7-4.6 7 4.6v10.8"/>
+        <path d="M9.6 20.4v-5.2h4.8v5.2"/><path d="M12 8.6v3.2M10.4 10.2h3.2"/></svg>
+      <span class="nav5__txt">Fundación</span>
+    </button>
+    <button class="nav5__b" data-tab="fDonaciones" aria-label="Donaciones">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20.4s-7.3-4.6-7.3-9.6a4.2 4.2 0 0 1 7.3-2.7 4.2 4.2 0 0 1 7.3 2.7c0 5-7.3 9.6-7.3 9.6z"/>
+        <path d="M12 10.4v4.4M9.8 12.6h4.4"/></svg>
+      <span class="nav5__txt">Donaciones</span>
+    </button>
+    <button class="nav5__b" data-tab="fMas" aria-label="Más">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="6" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="18" cy="12" r="1.9"/></svg>
+      <span class="nav5__txt">Más</span>
     </button>
   </div>
 </nav>
@@ -2703,7 +3126,7 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
 <section class="screen" id="screen-registro">
   <header class="alta__top">
     <span class="topbar__titulo">Registro</span>
-    <button class="btn btn--ghost btn--sm" data-pantalla="volver">Volver</button>
+    <button class="volver-ico" data-pantalla="volver" aria-label="Volver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
   </header>
   <div class="alta">
     <div class="alta__intro">
@@ -2725,7 +3148,7 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
 <section class="screen" id="screen-aporte">
   <header class="alta__top">
     <span class="topbar__titulo">Cumplí tu sueño</span>
-    <button class="btn btn--ghost btn--sm" id="apSalir">Volver</button>
+    <button class="volver-ico" id="apSalir" aria-label="Volver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
   </header>
   <div class="alta">
     <div class="alta__intro">
@@ -2762,11 +3185,46 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
   <div class="stats-pantalla"><div id="listaAvisos"></div></div>
 </section>
 
+<!-- ==================== GARANTÍA PARA SUBASTAR ==================== -->
+<section class="screen" id="screen-garantia">
+  <header class="of-top">
+    <button class="of-cerrar" id="garSalir" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <span class="of-titulo">Hacer oferta</span>
+    <span class="of-hueco"></span>
+  </header>
+  <div class="stats-pantalla" id="garCuerpo"></div>
+  <div class="gar-pie">
+    <button class="btn btn--confirmar" id="garPagar">OFERTAR</button>
+    <p class="of-pie" id="garPie"></p>
+  </div>
+</section>
+
+<!-- ==================== SUBASTAS DE LA FUNDACIÓN ==================== -->
+<section class="screen" id="screen-fsubastas">
+  <header class="alta__top">
+    <span class="cab-seccion"><b>Tus subastas</b></span>
+    <button class="volver-ico" data-volver-inicio aria-label="Volver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+  </header>
+  <div class="stats-pantalla">
+    <button class="crear-subasta" id="btnCrearSubasta">
+      <span class="crear-subasta__ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M12 5v14M5 12h14"/></svg>
+      </span>
+      <span class="crear-subasta__t"><b>Crear subasta</b><span>Publicá un lote a beneficio de tu fundación</span></span>
+    </button>
+    <div id="listaFSubastas"></div>
+  </div>
+</section>
+
 <!-- ==================== ACTIVIDADES Y EVENTOS ==================== -->
 <section class="screen" id="screen-eventos">
   <header class="alta__top">
     <div class="brand"><span class="brand__name">Actividades y eventos solidarios</span></div>
-    <button class="btn btn--primary btn--sm" data-volver-inicio>Volver</button>
+    <button class="volver-ico" data-volver-inicio aria-label="Volver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
   </header>
   <div class="stats-pantalla">
     <div class="carrusel" id="carruselEventos">
@@ -2783,7 +3241,7 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
 <section class="screen" id="screen-subastas">
   <header class="alta__top">
     <span class="cab-seccion"><b>Otros sueños</b></span>
-    <button class="btn-volver" data-volver-inicio>Volver</button>
+    <button class="volver-ico" data-volver-inicio aria-label="Volver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
   </header>
   <div class="stats-pantalla">
     <div class="subastas-grid" id="listaSubastas"></div>
@@ -2794,7 +3252,7 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
 <section class="screen" id="screen-fundaciones">
   <header class="alta__top">
     <span class="topbar__titulo">Conocé a fondo las fundaciones</span>
-    <button class="btn btn--primary btn--sm" data-volver-inicio>Volver</button>
+    <button class="volver-ico" data-volver-inicio aria-label="Volver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
   </header>
   <div class="stats-pantalla">
     <p class="lede">Las que forman parte de Cumplí tu Deseo. Tocá una para ver su perfil completo.</p>
@@ -2829,10 +3287,9 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
       <b>Subastas activas</b>
       <i><span class="cab-punto"></span><span id="cuentaSuenos">0 activas</span></i>
     </span>
-    <button class="btn-volver" id="deseosSalir">Volver</button>
+    <button class="volver-ico" id="deseosSalir" aria-label="Volver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
   </header>
   <div class="stats-pantalla">
-    <p class="lede">Deseos de otras personas. El que más ofrece se lo lleva, y la plata va a la fundación.</p>
     <div class="buscador" style="max-width:420px">
       <svg class="buscador__icono" viewBox="0 0 20 20" fill="none" aria-hidden="true">
         <circle cx="8.5" cy="8.5" r="6" stroke="currentColor" stroke-width="1.6"/>
@@ -2853,7 +3310,7 @@ body.perfil-quieto .panels,body.perfil-quieto .panel{
         <button class="btn btn--ghost btn--sm" id="stCSV">Exportar CSV</button>
         <button class="btn btn--ghost btn--sm" id="stPDF">Exportar PDF</button>
       </span>
-      <button class="btn btn--primary btn--sm" id="stSalir">Volver</button>
+      <button class="volver-ico" id="stSalir" aria-label="Volver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
     </div>
   </header>
   <div class="stats-pantalla" id="statsCuerpo"></div>
@@ -3922,7 +4379,8 @@ function tarjetaSubasta(a){
   var foto = a.imagenGeneral || (a.productos && a.productos[0] && a.productos[0].imagen) || "";
 
   return '<article class="lote">'+
-    '<div class="lote__foto"'+(foto ? ' style="background-image:url('+foto+')"' : '')+'>'+
+    '<div class="lote__foto'+(foto?' es-tocable':'')+'"'+
+      (foto ? ' style="background-image:url('+foto+')" data-ver-foto="'+a.id+'" role="button" tabindex="0"' : '')+'>'+
       '<button class="lote__fav" aria-label="Guardar">'+
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+
         '<path d="M12 20.4s-7.3-4.6-7.3-9.6a4.2 4.2 0 0 1 7.3-2.7 4.2 4.2 0 0 1 7.3 2.7c0 5-7.3 9.6-7.3 9.6z"/></svg></button>'+
@@ -3936,27 +4394,23 @@ function tarjetaSubasta(a){
           '<span class="lote__rotulo">'+(a.puja ? 'Última oferta' : 'Precio base')+'</span>'+
           '<span class="lote__monto">'+pesos(a.puja || a.base)+'</span>'+
         '</div>'+
-        '<div class="lote__gana">'+
-          '<span class="lote__rotulo">Va ganando</span>'+
-          '<span class="lote__ganador">'+
-            '<span class="lote__ava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">'+
-            '<circle cx="12" cy="8.6" r="3.4"/><path d="M5.4 19.4c0-3.3 2.9-5.4 6.6-5.4s6.6 2.1 6.6 5.4"/></svg></span>'+
-            '<b>'+quien+'</b></span>'+
-        '</div>'+
+
       '</div>'+
 
       '<div class="reloj" data-cierra="'+esc(a.cierreISO||"")+'">'+
-        '<span class="reloj__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">'+
-          '<circle cx="12" cy="12" r="8.4"/><path d="M12 7.4V12l3 1.8"/></svg></span>'+
-        '<span class="reloj__cuenta">'+
-          '<span class="reloj__u"><b data-u="d">--</b><span>días</span></span>'+
-          '<span class="reloj__u"><b data-u="h">--</b><span>horas</span></span>'+
-          '<span class="reloj__u"><b data-u="m">--</b><span>min</span></span>'+
-        '</span>'+
+        '<div class="reloj__fila">'+
+          '<span class="reloj__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">'+
+            '<circle cx="12" cy="12" r="8.4"/><path d="M12 7.4V12l3 1.8"/></svg></span>'+
+          '<span class="reloj__cuenta">'+
+            '<span class="reloj__u"><b data-u="d">--</b><span>días</span></span>'+
+            '<span class="reloj__u"><b data-u="h">--</b><span>horas</span></span>'+
+            '<span class="reloj__u"><b data-u="m">--</b><span>min</span></span>'+
+          '</span>'+
+        '</div>'+
         '<span class="reloj__fecha">'+
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">'+
           '<rect x="3.6" y="5" width="16.8" height="15" rx="2.6"/><path d="M8 3v3.4M16 3v3.4M3.6 9.6h16.8"/></svg>'+
-          esc(a.cierre||"")+'</span>'+
+          'Cierra el '+esc(a.cierre||"")+'</span>'+
       '</div>'+
 
       '<div class="lote__fund">'+
@@ -4101,6 +4555,8 @@ function rankingDe(fid){
 }
 
 function pintarIzquierda(){
+  // La interfaz cambia según el rol de quien entró.
+  document.body.classList.toggle("es-fundacion", !!(sesion && esFundacion()));
   if(!sesion){
     $("#panelIzq").innerHTML = "";
     $("#navMail").textContent = "Iniciar sesión";
@@ -4132,7 +4588,11 @@ function pintarPanelUsuario(){
          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+
          '<path d="M16.5 4.5l3 3L8 19H5v-3z"/></svg></span>'+
      '</button>'+
-     '<div class="perfil-tarjeta__datos">'+
+     '<button class="salir-chico" id="btnCerrarSesion" aria-label="Cerrar sesión">'+
+     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+
+     '<path d="M14 4.5H6.5v15H14"/><path d="M12.5 12h8"/><path d="M17.5 8.5 21 12l-3.5 3.5"/></svg>'+
+     'Salir</button>'+
+   '<div class="perfil-tarjeta__datos">'+
        '<div class="perfil-tarjeta__nombre editable" data-editar="perfil">'+esc(sesion.nombre)+'</div>'+
        '<div class="perfil-tarjeta__handle">@'+esc(sesion.handle || armarHandle(sesion.nombre, {}))+'</div>'+
        '<div class="perfil-tarjeta__mail editable" data-editar="perfil">'+esc(sesion.mail)+'</div>'+
@@ -4378,9 +4838,47 @@ function acomodarPlaca(id){
   var cab = sc.querySelector(".alta__top");
   var caja = sc.querySelector(".stats-pantalla");
   if(!cab || !caja) return;
-  var abajo = cab.getBoundingClientRect().bottom;
-  if(!(abajo > 0) || abajo > (window.innerHeight || 800) * 0.3) abajo = 56;
-  caja.style.top = Math.round(abajo + 4) + "px";
+
+  var alto = window.innerHeight || document.documentElement.clientHeight || 0;
+  if(!alto) return;
+
+  var arriba = cab.getBoundingClientRect().bottom;
+  if(!(arriba > 0) || arriba > alto * 0.3) arriba = 56;
+
+  // El alto de la barra se mide de verdad: con un valor supuesto,
+  // la tarjeta terminaba escondida por debajo del menú.
+  var barra = document.getElementById("nav5");
+  var hBarra = barra ? barra.offsetHeight : 0;
+  if(!(hBarra > 0) || hBarra > alto * 0.35) hBarra = 106;
+
+  var tope = Math.round(arriba + 4);
+  var libre = Math.round(alto - tope - hBarra - 8);
+  if(libre < 220) return;
+
+  caja.style.top = tope + "px";
+  caja.style.bottom = "auto";
+  caja.style.height = libre + "px";
+
+  // Al carrusel le damos el alto exacto que queda tras el buscador,
+  // así la tarjeta arranca pegada a él y cierra sobre el menú.
+  // El buscador aparece con o sin envoltorio según la pantalla.
+  var busca = caja.querySelector(".buscador-wrap") || caja.querySelector(".buscador");
+  var pista = caja.querySelector(".suenos-lista, .subastas-grid, .carrusel");
+  if(pista){
+    var hBusca = busca ? Math.round(busca.getBoundingClientRect().height) : 0;
+    if(hBusca > libre * 0.4) hBusca = 0;
+    var hPista = libre - hBusca - (busca ? 6 : 0);
+    if(hPista > 160){
+      pista.style.height = hPista + "px";
+      // La altura de cada tarjeta se fija acá, no en el CSS: dejando que el
+      // carril la resolviera, el borde inferior quedaba bajo el menú.
+      var hFicha = hPista - 30;
+      $$(".sueno, .lote", pista).forEach(function(t){
+        t.style.setProperty("height", hFicha + "px", "important");
+        t.style.setProperty("max-height", hFicha + "px", "important");
+      });
+    }
+  }
 }
 function acomodarDeseos(){ acomodarPlaca("screen-deseos"); }
 function acomodarCarruseles(){
@@ -4752,6 +5250,25 @@ function modalDonarDirecto(fid, campanaId){
         toast("¡Gracias! Donaste "+pesos(monto)+(anon?" de forma anónima":"")+" a "+destinoTxt+".");
       };
     }});
+}
+
+// Ver la foto del lote en grande.
+function modalFoto(aid){
+  var a = DB.aportes.filter(function(x){ return x.id===aid; })[0];
+  if(!a) return;
+  var foto = a.imagenGeneral || (a.productos && a.productos[0] && a.productos[0].imagen);
+  if(!foto) return;
+  var v = document.createElement("div");
+  v.className = "visor";
+  v.innerHTML = '<button class="visor__cerrar" aria-label="Cerrar">&times;</button>'+
+    '<figure class="visor__marco"><img src="'+foto+'" alt=""></figure>'+
+    '<p class="visor__pie">'+esc(a.titulo||"")+'</p>';
+  document.body.appendChild(v);
+  requestAnimationFrame(function(){ v.classList.add("is-on"); });
+  v.addEventListener("click", function(){
+    v.classList.remove("is-on");
+    setTimeout(function(){ v.remove(); }, 220);
+  });
 }
 
 function modalPujar(aid){
@@ -5604,9 +6121,13 @@ function abrirPantalla(id, despues){
 }
 function abrirSubastas(){
   abrirPantalla("screen-subastas", function(){
+    // Se dibujan las tarjetas y recién después se las mide, con una
+    // segunda pasada por si el navegador todavía no terminó el dibujo.
     pintarSubastas();
     arrancarRelojes();
     requestAnimationFrame(acomodarCarruseles);
+    setTimeout(acomodarCarruseles, 60);
+    setTimeout(acomodarCarruseles, 220);
   });
   document.body.classList.add("sin-scroll");
 }
@@ -5820,7 +6341,10 @@ function abrirDeseos(){
   $("#screen-deseos").classList.add("is-active");
   document.body.classList.add("sin-scroll");
   pintarListaDeseos();
-  requestAnimationFrame(acomodarCarruseles);
+  // Primero se dibujan las tarjetas y recién después se las mide.
+  requestAnimationFrame(function(){ acomodarCarruseles(); });
+  setTimeout(acomodarCarruseles, 60);
+  setTimeout(acomodarCarruseles, 220);
   window.scrollTo({top:0});
 }
 function cerrarDeseos(){
@@ -5832,10 +6356,18 @@ function cerrarDeseos(){
 }
 
 function pintarListaDeseos(){
+  // Una fundación ve sólo los sueños y subastas dirigidos a ella.
+  var mia = esFundacion() ? miFundacion() : null;
   var cuenta = $("#cuentaSuenos");
-  if(cuenta) cuenta.textContent = DB.solicitudes.length + (DB.solicitudes.length===1 ? " activa" : " activas");
+  var propios = mia
+    ? DB.solicitudes.filter(function(x){ return x.fid === mia.id; }).length
+    : DB.solicitudes.length;
+  if(cuenta) cuenta.textContent = propios + (propios===1 ? " activa" : " activas");
+  var titulo = $("#screen-deseos .cab-seccion b");
+  if(titulo) titulo.textContent = mia ? "Sueños para tu fundación" : "Subastas activas";
   var q = ($("#buscaDeseos") && $("#buscaDeseos").value || "").trim().toLowerCase();
   var lista = DB.solicitudes.filter(function(x){
+    if(mia && x.fid !== mia.id) return false;
     if(!q) return true;
     return (x.titulo||"").toLowerCase().indexOf(q) > -1 || (x.quien||"").toLowerCase().indexOf(q) > -1;
   }).slice().reverse();
@@ -5863,11 +6395,7 @@ function tarjetaSueno(x){
     '<div class="sueno__cab">'+
       avatarUsuario(quien, "sueno__ava")+
       '<div class="sueno__quien">'+
-        '<b>'+esc(quien)+
-          '<svg class="sueno__ok" viewBox="0 0 24 24" fill="currentColor">'+
-          '<path d="M12 2.4l2.4 1.7 2.9-.2 1 2.8 2.4 1.7-1 2.8 1 2.8-2.4 1.7-1 2.8-2.9-.2L12 21.6l-2.4-1.7-2.9.2-1-2.8L3.3 15.6l1-2.8-1-2.8 2.4-1.7 1-2.8 2.9.2z"/>'+
-          '<path d="M10.6 15.2 7.4 12l1.3-1.3 1.9 1.9 4.7-4.7 1.3 1.3z" fill="#0b2136"/></svg>'+
-        '</b>'+
+        '<b>'+esc(quien)+'</b>'+
         '<span>Pidió'+(f ? ' · '+esc(f.nombre) : '')+'</span>'+
       '</div>'+
     '</div>'+
@@ -5893,20 +6421,13 @@ function tarjetaSueno(x){
         'Superá la oferta · <b>'+pesos(minimo)+'</b></span>'+
     '</div>'+
 
+    (propio ? '<button class="borrar-sueno" data-borrar-sueno="'+x.id+'">Eliminar publicación</button>' : '')+
     (puedeAportar()
       ? '<button class="sueno__btn" data-ofertar-sueno="'+x.id+'">'+
-          'Subastar '+pesos(minimo)+
+          'SUBASTAR'+
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'+
           '<path d="M4 12h15"/><path d="M13.5 6.5 19.5 12l-6 5.5"/></svg></button>'
       : '')+
-
-    '<p class="sueno__pie">'+
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">'+
-      '<circle cx="9" cy="9" r="3"/><path d="M3.6 18.4c0-2.8 2.4-4.6 5.4-4.6s5.4 1.8 5.4 4.6"/>'+
-      '<path d="M16.4 7.2a2.9 2.9 0 0 1 0 5.6"/><path d="M18.2 18.4c0-2.2-1-3.7-2.6-4.4"/></svg>'+
-      (x.ofertas||[]).length+' ofertas'+
-      (propio ? '<button class="borrar-sueno" data-borrar-sueno="'+x.id+'">Eliminar</button>' : '')+
-    '</p>'+
   '</article>';
 }
 
@@ -5928,26 +6449,18 @@ function historialSueno(x){
 function modalDeseo(did){
   var x = DB.solicitudes.filter(function(y){ return y.id===did; })[0];
   if(!x) return;
-  var f = x.fid ? fundacionPorId(x.fid) : null;
   var quien = DB.perfilesAnonimos[x.quien] ? "Donante anónimo" : x.quien;
-  abrirModal({eyebrow:"Deseo de "+quien, titulo:x.titulo||"Deseo",
-    sub: (x.valor ? pesos(x.valor)+" · " : "")+
-      (f ? "Pedido a "+f.nombre+(x.destino?" · "+x.destino:"") : "Abierto a cualquier fundación"),
+
+  abrirModal({eyebrow:"Sueño de "+quien, titulo:x.titulo||"Sueño", sub:"",
     ancho:"grande",
-    body:'<p class="deseo-texto">'+esc(x.aCambio||"")+'</p>'+
-      historialSueno(x)+
-      ((x.mail || x.whatsapp)
-        ? '<div class="acciones" style="margin-top:18px">'+
-          (x.mail ? '<button class="btn btn--ghost btn--sm" data-deseo-mail="'+x.id+'">Escribirle por mail</button>' : '')+
-          (x.whatsapp ? '<button class="btn btn--ghost btn--sm" data-deseo-wsp="'+x.id+'">Escribirle por WhatsApp</button>' : '')+
-          '</div>'
-        : '')+
-      (puedeAportar()
-        ? '<div class="acciones" style="margin-top:10px">'+
-          '<button class="btn btn--primary btn--sm" data-ofertar-sueno="'+x.id+'">Ofertar para cumplirlo</button></div>'
-        : ''),
-    ok:"Cerrar",
-    onOk:function(){ cerrarModal(); }});
+    body:'<p class="deseo-texto">'+esc(x.aCambio||"")+'</p>',
+    ok:"SUBASTAR",
+    onOk:function(){
+      cerrarModal();
+      setTimeout(function(){
+        if(garantiaPaga[did]) modalOfertarSueno(did); else modalGarantia(did);
+      }, 260);
+    }});
 }
 
 // Ofertar es comprometerse a cubrir el sueño: gana la oferta más alta.
@@ -5963,6 +6476,306 @@ function borrarSueno(did){
       cerrarModal(); pintarTodo(); pintarListaDeseos();
       toast("Publicación eliminada.");
     }});
+}
+
+// Antes de subastar se pide la garantía: son $10.000 que van derecho a la
+// fundación. En la beta los datos de tarjeta están congelados.
+var GARANTIA = 10000;
+
+// Interruptor del modo fundación. En false, la app entra siempre como
+// donante; toda la interfaz de fundación queda en el código, sin acceso.
+var MODO_FUNDACION = false;
+var garantiaPaga = {};
+
+// ---- pantallas propias de la fundación ----
+function abrirFSubastas(){
+  abrirPantalla("screen-fsubastas", pintarFSubastas);
+}
+
+function pintarFSubastas(){
+  var f = miFundacion(); if(!f) return;
+  var caja = $("#listaFSubastas"); if(!caja) return;
+  var mias = DB.aportes.filter(function(a){ return a.fid === f.id && a.estado === "en subasta"; });
+  caja.innerHTML = '<p class="perfil-rotulo">'+mias.length+(mias.length===1?' subasta abierta':' subastas abiertas')+'</p>'+
+    (mias.length
+      ? '<div class="stack" style="gap:10px">'+mias.map(function(a){
+          var mejor = a.puja || a.base;
+          return '<div class="fila-op" data-pujar-info="'+a.id+'">'+
+            '<span class="fila-op__ico">'+
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+
+              '<rect x="3" y="18.6" width="12.4" height="2.4" rx="1.2"/>'+
+              '<path d="M13.6 2.6l6.2 6.2-2.8 2.8-6.2-6.2z"/><path d="M11.4 7.6l2.2 2.2-6.8 6.8-2.2-2.2z"/></svg></span>'+
+            '<span class="fila-op__t"><b>'+esc(a.titulo)+'</b>'+
+              '<span>'+(a.puja ? 'Última oferta '+pesos(mejor) : 'Base '+pesos(mejor))+
+              ' · cierra el '+esc(a.cierre||"—")+'</span></span>'+
+          '</div>';
+        }).join("")+'</div>'
+      : '<div class="empty">Todavía no publicaste ninguna subasta.</div>');
+}
+
+// El formulario para publicar un lote nuevo.
+function modalCrearSubasta(){
+  var f = miFundacion(); if(!f) return;
+  var foto = null;
+  abrirModal({eyebrow:"Nueva subasta", titulo:"Crear subasta",
+    sub:"Publicá un lote donado. Lo recaudado va a tu fundación.",
+    ancho:"grande", clase:"modal--pleno", cancelar:"Volver",
+    body:
+      campo("csTitulo","¿Qué se subasta?","text","")+
+      '<div class="field"><label for="csDetalle">Contalo en pocas líneas</label>'+
+      '<textarea id="csDetalle" class="caja-grande"></textarea></div>'+
+      campoPesos("csBase","Precio base","")+
+      campo("csCierre","¿Qué día cierra?","date","")+
+      '<div class="field"><label for="csFoto">Foto del lote</label>'+
+      '<input type="file" id="csFoto" accept="image/*"></div>'+
+      '<div class="post__previas" id="csPrevia"></div>'+
+      selectorCampanaFund(f),
+    ok:"Publicar subasta",
+    after:function(){
+      $("#csFoto").addEventListener("change", function(e){
+        leerArchivo(e.target, function(src){
+          if(!src) return;
+          foto = src;
+          $("#csPrevia").innerHTML = '<span style="background-image:url('+src+')"></span>';
+        });
+      });
+    },
+    onOk:function(){
+      var t = val("csTitulo"), det = val("csDetalle"), base = valPesos("csBase");
+      if(DEMO){
+        if(!t) t = "Lote solidario";
+        if(!det) det = "Publicado desde la versión beta.";
+        if(!base) base = 50000;
+      } else if(!t || !base){ toast("Poné al menos el título y el precio base."); return; }
+
+      var cierreISO = val("csCierre") || "";
+      var texto = cierreISO
+        ? new Date(cierreISO+"T21:00").toLocaleDateString("es-AR", {day:"numeric", month:"long"})
+        : "a definir";
+      var cid = $("#csCausa") ? $("#csCausa").value : "";
+      var causa = cid ? (f.causas.filter(function(c){ return c.id===cid; })[0]||{}).t : "Aporte general";
+
+      DB.aportes.push({id:nid("a"), quien:f.nombre, fid:f.id, titulo:t, detalle:det,
+        imagenGeneral:foto, productos:[], base:base, puja:0, pujador:null,
+        estado:"en subasta", cierre:texto, cierreISO:(cierreISO?cierreISO+"T21:00":""),
+        siguiendo:0, causa:causa, ofertas:[]});
+
+      cerrarModal(); pintarTodo(); pintarFSubastas();
+      toast("Subasta publicada.");
+    }});
+}
+
+function selectorCampanaFund(f){
+  if(!f.causas || !f.causas.length) return "";
+  return '<div class="field"><label for="csCausa">¿A qué campaña va?</label><select id="csCausa">'+
+    '<option value="">Aporte general</option>'+
+    f.causas.map(function(c){ return '<option value="'+c.id+'">'+esc(c.t)+'</option>'; }).join("")+
+    '</select></div>';
+}
+
+// Un menú con lo que no entra en la barra.
+function modalMasFundacion(){
+  var f = miFundacion(); if(!f) return;
+  abrirModal({eyebrow:"Más", titulo:"Gestión de "+f.nombre, sub:"",
+    body:
+      '<button class="fila-op" id="masPublicar"><span class="fila-op__ico">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">'+
+        '<rect x="3.6" y="4.6" width="16.8" height="14.8" rx="2.6"/><path d="M3.6 9.4h16.8"/>'+
+        '<path d="M12 12.4v4M10 14.4h4"/></svg></span>'+
+        '<span class="fila-op__t"><b>Publicar actividad</b><span>Contá lo que están haciendo</span></span>'+
+        '<span class="fila-op__chev">&#8250;</span></button>'+
+      '<button class="fila-op" id="masEventos"><span class="fila-op__ico">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">'+
+        '<rect x="3.6" y="5" width="16.8" height="15" rx="2.6"/><path d="M8 3v3.4M16 3v3.4M3.6 9.6h16.8"/></svg></span>'+
+        '<span class="fila-op__t"><b>Eventos</b><span>Agenda de tu fundación</span></span>'+
+        '<span class="fila-op__chev">&#8250;</span></button>'+
+      '<button class="fila-op es-salir" id="masSalir"><span class="fila-op__ico">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+
+        '<path d="M14 4.5H6.5v15H14"/><path d="M12.5 12h8"/><path d="M17.5 8.5 21 12l-3.5 3.5"/></svg></span>'+
+        '<span class="fila-op__t"><b>Cerrar sesión</b><span>Salir de la cuenta</span></span>'+
+        '<span class="fila-op__chev">&#8250;</span></button>',
+    ok:"Cerrar", onOk:function(){ cerrarModal(); }});
+}
+
+var garantiaDe = null, garantiaMedio = "tarjeta", garantiaMonto = 0, garantiaTipo = "sueno";
+
+// Devuelve, para lo que se esté ofertando, los datos que la pantalla necesita:
+// sirve igual para un sueño en subasta que para un lote de Otros sueños.
+function datosOferta(){
+  if(garantiaTipo === "lote"){
+    var a = DB.aportes.filter(function(y){ return y.id===garantiaDe; })[0];
+    if(!a) return null;
+    return {titulo:a.titulo, fid:a.fid, actual:(a.puja || a.base),
+            minimo:(a.puja || a.base) + 1000, obj:a};
+  }
+  var x = DB.solicitudes.filter(function(y){ return y.id===garantiaDe; })[0];
+  if(!x) return null;
+  var mejor = mejorOferta(x);
+  return {titulo:x.titulo, fid:x.fid, actual:(mejor ? mejor.monto : (x.valor||0)),
+          minimo:(mejor ? mejor.monto + 1000 : (x.valor||1000)), obj:x};
+}
+
+function modalGarantia(did, tipo){
+  garantiaTipo = tipo || "sueno";
+  garantiaDe = did; garantiaMedio = "tarjeta"; garantiaMonto = 0;
+  if(!datosOferta()) return;
+  abrirPantalla("screen-garantia", pintarGarantia);
+}
+
+function pintarGarantia(){
+  var dat = datosOferta(); if(!dat) return;
+  var x = dat.obj;
+  var f = dat.fid ? fundacionPorId(dat.fid) : null;
+  var actual = dat.actual, minimo = dat.minimo;
+  if(!(garantiaMonto >= minimo)) garantiaMonto = minimo;
+
+  $("#garCuerpo").innerHTML =
+    // el sueño y su oferta actual, sin caja
+    '<div class="of-enc">'+
+      '<b class="of-enc__t">'+esc(dat.titulo||"Sueño")+'</b>'+
+      '<span class="of-enc__r">Oferta actual</span>'+
+      '<i class="of-enc__m">'+pesos(actual)+'</i>'+
+    '</div>'+
+
+    // tu oferta, con los botones de menos y más
+    '<p class="of-rot">Tu oferta</p>'+
+    '<div class="of-monto">'+
+      '<button type="button" class="of-paso" data-paso="-1" aria-label="Bajar">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">'+
+        '<path d="M6 12h12"/></svg></button>'+
+      '<span class="of-monto__v"><em>$</em>'+
+        '<input id="garMontoTxt" type="text" inputmode="numeric" autocomplete="off" '+
+        'value="'+Number(garantiaMonto).toLocaleString("es-AR")+'"></span>'+
+      '<button type="button" class="of-paso" data-paso="1" aria-label="Subir">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">'+
+        '<path d="M12 6v12M6 12h12"/></svg></button>'+
+      '<input type="hidden" id="garMonto" value="'+garantiaMonto+'">'+
+    '</div>'+
+    '<p class="of-supera" id="garSupera">'+
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+
+      '<circle cx="12" cy="12" r="8.6"/><path d="M8.4 12.2l2.4 2.4 4.8-4.8"/></svg>'+
+      'Superás la oferta actual por <b>'+pesos(garantiaMonto - actual)+'</b></p>'+
+
+    // la garantía
+    '<div class="of-gar">'+
+      '<span class="of-gar__ico">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+
+        '<path d="M12 3.4l7 2.6v5.4c0 4.2-2.9 7.4-7 9.2-4.1-1.8-7-5-7-9.2V6z"/>'+
+        '<path d="M9.2 12.2l2 2 3.6-3.8"/></svg></span>'+
+      '<div class="of-gar__t">'+
+        '<b>Subastar cuesta <em>'+pesos(GARANTIA)+'</em></b>'+
+        '<p>Funciona como garantía: al ofertar asumís el compromiso de sostener tu oferta si '+
+          'resultás ganador. Los '+pesos(GARANTIA)+' no se devuelven y van directo a '+
+          esc(f?f.nombre:"la fundación")+'.</p>'+
+      '</div>'+
+    '</div>'+
+
+    // medio de pago
+    '<p class="of-rot">¿Cómo querés pagar?</p>'+
+    '<div class="medios">'+
+      '<button type="button" class="medio'+(garantiaMedio==="tarjeta"?" is-on":"")+'" data-medio="tarjeta">'+
+        '<span class="medio__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">'+
+        '<rect x="2.6" y="5.4" width="18.8" height="13.2" rx="2.4"/><path d="M2.6 9.8h18.8"/></svg></span>'+
+        'Tarjeta</button>'+
+      '<button type="button" class="medio'+(garantiaMedio==="mp"?" is-on":"")+'" data-medio="mp">'+
+        '<span class="medio__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+
+        '<path d="M2.6 11.4l3-3 2.8 2.8"/><path d="M21.4 11.4l-3-3-4 4a1.5 1.5 0 0 1-2.1 0L10 9.2l-3.5 3.5a1.6 1.6 0 0 0 0 2.3l3.2 3.2a1.6 1.6 0 0 0 2.3 0"/>'+
+        '<path d="M12 18.6l2.5 1.6a1.4 1.4 0 0 0 1.9-.4l3.5-5"/></svg></span>'+
+        'Mercado Pago</button>'+
+    '</div>'+
+
+    (garantiaMedio === "mp"
+      ? '<div class="of-medio"><span class="of-marca of-marca--mp">MP</span>'+
+        '<div class="of-medio__t"><b>'+esc(sesion?sesion.mail:"")+'</b><span>Cuenta vinculada</span></div>'+
+        '<span class="of-cambiar es-off">Vincular</span></div>'
+      : '<div class="of-medio"><span class="of-marca">VISA</span>'+
+        '<div class="of-medio__t"><b>•••• 3704</b><span>'+esc(sesion?sesion.nombre:"")+'</span></div>'+
+        '<button type="button" class="of-cambiar" id="garBtnPagar" disabled>Cambiar '+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">'+
+        '<path d="M9 5l7 7-7 7"/></svg></button></div>')+
+
+    '<p class="of-seguro">'+
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">'+
+      '<rect x="5" y="10.4" width="14" height="9.2" rx="2.2"/><path d="M8.4 10.4V8a3.6 3.6 0 0 1 7.2 0v2.4"/></svg>'+
+      'Tus datos están protegidos con encriptación de nivel bancario.</p>';
+
+  // Se puede tocar el número y escribirlo a mano.
+  var cajaTxt = $("#garMontoTxt");
+  if(cajaTxt){
+    cajaTxt.addEventListener("input", function(){
+      var n = Number(String(cajaTxt.value).replace(/[^\d]/g, "")) || 0;
+      garantiaMonto = n;
+      $("#garMonto").value = n;
+      refrescarOferta(n, minimo, actual);
+    });
+    cajaTxt.addEventListener("blur", function(){
+      if(garantiaMonto < minimo) garantiaMonto = minimo;
+      pintarGarantia();
+    });
+  }
+
+  var btn = $("#garPagar");
+  if(btn) btn.innerHTML = 'OFERTAR '+pesos(garantiaMonto)+
+    ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">'+
+    '<path d="M4 12h15"/><path d="M13.5 6.5 19.5 12l-6 5.5"/></svg>';
+  var pie = $("#garPie");
+  if(pie) pie.textContent = "Incluye garantía de subasta de "+pesos(GARANTIA);
+}
+
+// Actualiza el cartelito y el botón mientras se escribe, sin redibujar todo
+// (redibujar haría perder el cursor del teclado).
+function refrescarOferta(n, minimo, actual){
+  var av = $("#garSupera");
+  if(av){
+    if(n >= minimo){
+      av.classList.remove("es-baja");
+      av.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '+
+        'stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/>'+
+        '<path d="M8.4 12.2l2.4 2.4 4.8-4.8"/></svg>'+
+        'Superás la oferta actual por <b>'+pesos(n - actual)+'</b>';
+    } else {
+      av.classList.add("es-baja");
+      av.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '+
+        'stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/>'+
+        '<path d="M12 8v5M12 16.2v.2"/></svg>'+
+        'Necesitás al menos <b>'+pesos(minimo)+'</b>';
+    }
+  }
+  var b = $("#garPagar");
+  if(b) b.innerHTML = 'OFERTAR '+pesos(Math.max(n, 0))+
+    ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">'+
+    '<path d="M4 12h15"/><path d="M13.5 6.5 19.5 12l-6 5.5"/></svg>';
+}
+
+function pagarGarantia(){
+  if(!exigirSesion("subastar")) return;
+  var dat = datosOferta(); if(!dat) return;
+  var f = dat.fid ? fundacionPorId(dat.fid) : null;
+  var monto = valPesos("garMontoTxt") || garantiaMonto;
+  if(monto < dat.minimo){ toast("Tenés que ofertar al menos "+pesos(dat.minimo)+"."); return; }
+
+  garantiaPaga[garantiaDe] = true;
+  if(f){
+    DB.donaciones.push({id:nid("d"), quien:sesion.nombre, quienPublico:sesion.nombre,
+      anonimo:false, mail:sesion.mail, fid:f.id, causa:"Garantía de subasta",
+      monto:GARANTIA, tipo:"garantia", fecha:"hoy", fechaISO:hoyISO()});
+  }
+
+  if(garantiaTipo === "lote"){
+    var a = dat.obj;
+    a.puja = monto; a.pujador = sesion.nombre;
+    a.ofertas = a.ofertas || [];
+    a.ofertas.push({quien:sesion.nombre, monto:monto, fecha:hoyISO(), anonimo:false});
+    abrirSubastas();
+    toast("Ofertaste "+pesos(monto)+" por "+dat.titulo+".");
+    return;
+  }
+
+  var x = dat.obj;
+  x.ofertas = x.ofertas || [];
+  x.ofertas.push({quien:sesion.nombre, monto:monto, fecha:hoyISO(), anonimo:false});
+  abrirDeseos();
+  toast("Ofertaste "+pesos(monto)+". La garantía va a "+(f?f.nombre:"la fundación")+".");
 }
 
 function modalOfertarSueno(did){
@@ -6366,7 +7179,7 @@ function pintarAporte(){
         '<textarea id="ppCambio" class="caja-deseo" placeholder=""></textarea></div>'+
         campoPesos("ppValor","¿Cuánto estás dispuesto a donar?","")+
         '<div class="field field--fund">'+
-          '<label for="ppFundQ">¿A qué fundación sumás?</label>'+
+          '<label for="ppFundQ">¿A qué fundación donás?</label>'+
           '<input type="text" id="ppFundQ" class="busca-fund" placeholder="Buscar fundación…" autocomplete="off">'+
           '<div class="fund-res" id="ppFundRes"></div>'+
           '<input type="hidden" id="ppFundV">'+
@@ -7103,6 +7916,16 @@ function abrirLogin(){
 }
 
 function volverHome(){
+  // Una fundación no tiene menú de donante: vuelve a su propio panel.
+  if(sesion && esFundacion()){
+    document.body.classList.remove("portada");
+    document.body.classList.remove("sin-scroll");
+    $$(".screen").forEach(function(sc){ sc.classList.remove("is-active"); });
+    $("#screen-app").classList.add("is-active");
+    irA(0);
+    revisarCielo();
+    return;
+  }
   document.body.classList.remove("portada");
   document.body.classList.remove("sin-scroll");
   document.body.classList.remove("noche");
@@ -7126,7 +7949,7 @@ document.addEventListener("click", function(e){
 (function(){
   var campo = $("#mail");
   if(!campo) return;
-  var pasos = ["USUARIO", "FUNDACIÓN"];
+  var pasos = MODO_FUNDACION ? ["USUARIO", "FUNDACIÓN"] : ["USUARIO"];
   var i = 0, x0 = null;
   function mover(){
     i = (i + 1) % pasos.length;
@@ -7138,6 +7961,7 @@ document.addEventListener("click", function(e){
     if(x0 === null) return;
     var dx = e.clientX - x0; x0 = null;
     if(Math.abs(dx) < 42) return;
+    if(pasos.length < 2) return;
     mover(); campo.blur();
   });
   campo.addEventListener("pointercancel", function(){ x0 = null; });
@@ -7148,6 +7972,10 @@ $("#btnLogin").addEventListener("click", function(){
   // Beta: atajos para probar cada rol sin credenciales.
   var clave = (m || "").trim().toLowerCase();
   if(clave === "fundación" || clave === "fundacion"){
+    if(!MODO_FUNDACION){
+      toast("El acceso como fundación no está disponible en esta versión.");
+      return;
+    }
     var fx = fundacionPorId("fFav") || DB.fundaciones[0];
     entrarComoFundacion(fx.id);
     toast("Entraste como "+fx.nombre+".");
@@ -7196,7 +8024,8 @@ document.addEventListener("click", function(e){
     return;
   }
   if((t = e.target.closest("[data-complementario]"))) return abrirPantallaAporte("complementario", t.dataset.complementario);
-  if((t = e.target.closest("[data-pujar]"))) return modalPujar(t.dataset.pujar);
+  if((t = e.target.closest("[data-ver-foto]"))) return modalFoto(t.dataset.verFoto);
+  if((t = e.target.closest("[data-pujar]"))) return modalGarantia(t.dataset.pujar, "lote");
   if((t = e.target.closest("[data-toggle]"))){
     var caja = document.getElementById(t.dataset.toggle);
     if(caja) caja.classList.toggle("is-open");
@@ -7244,6 +8073,12 @@ document.addEventListener("click", function(e){
       if(!sesion) abrirLogin();
       else { volverHome(); irA(0); }
     }
+    // Entradas propias del modo fundación
+    else if(cual === "fPerfil"){ volverHome(); irA(0); revisarCielo(); }
+    else if(cual === "fSuenos") abrirDeseos();
+    else if(cual === "fSubastas") abrirFSubastas();
+    else if(cual === "fDonaciones") abrirStatsFundacion();
+    else if(cual === "fMas") modalMasFundacion();
     return;
   }
   if((t = e.target.closest("[data-aviso]"))){
@@ -7256,6 +8091,26 @@ document.addEventListener("click", function(e){
     else volverHome();
     return;
   }
+  if(e.target.closest("#garSalir")) return garantiaTipo === "lote" ? abrirSubastas() : abrirDeseos();
+  if(e.target.closest("#garPagar")) return pagarGarantia();
+  if((t = e.target.closest("[data-paso]"))){
+    var dat2 = datosOferta();
+    if(dat2) garantiaMonto = Math.max(dat2.minimo, garantiaMonto + Number(t.dataset.paso) * 1000);
+    pintarGarantia();
+    return;
+  }
+  if((t = e.target.closest("[data-medio]"))){
+    garantiaMedio = t.dataset.medio;
+    pintarGarantia();
+    return;
+  }
+  if(e.target.closest("#btnCrearSubasta")) return modalCrearSubasta();
+  if(e.target.closest("#masPublicar")){ cerrarModal(); setTimeout(modalPublicarActividad, 260); return; }
+  if(e.target.closest("#masEventos")){ cerrarModal(); setTimeout(abrirEventos, 260); return; }
+  if(e.target.closest("#masSalir")){
+    cerrarModal(); sesion = null; pintarTodo(); abrirLogin(); toast("Cerraste sesión.");
+    return;
+  }
   if(e.target.closest("#btnPublicarActividad")) return modalPublicarActividad();
   if(e.target.closest("#btnVerSubastas")) return abrirSubastas();
   if(e.target.closest("#btnVerEventos")) return abrirEventos();
@@ -7265,7 +8120,10 @@ document.addEventListener("click", function(e){
   if((t = e.target.closest("[data-deseo-mail]"))) return contactarDeseoMail(t.dataset.deseoMail);
   if((t = e.target.closest("[data-deseo-wsp]"))) return contactarDeseoWsp(t.dataset.deseoWsp);
   if((t = e.target.closest("[data-borrar-sueno]"))) return borrarSueno(t.dataset.borrarSueno);
-  if((t = e.target.closest("[data-ofertar-sueno]"))) return modalOfertarSueno(t.dataset.ofertarSueno);
+  if((t = e.target.closest("[data-ofertar-sueno]"))){
+    var did = t.dataset.ofertarSueno;
+    return garantiaPaga[did] ? modalOfertarSueno(did) : modalGarantia(did);
+  }
   if((t = e.target.closest("[data-ver-deseo]"))) return modalDeseo(t.dataset.verDeseo);
   if(e.target.closest("#btnAnonimo")) return alternarAnonimo();
   if(e.target.closest("#btnInvitar")) return modalInvitar();
